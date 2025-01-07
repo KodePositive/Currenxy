@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.geneus.currenxy"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.geneus.currenxy"

@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CurrencyDao {
     @Query("SELECT * FROM currency_info WHERE type = :type")
-    suspend fun getCurrenciesFlow(type: CurrencyType): Flow<List<CurrencyEntity>>
+    fun getCurrenciesFlow(type: CurrencyType): Flow<List<CurrencyEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(currencies: List<CurrencyEntity>)
+    fun insertAll(currencies: List<CurrencyEntity>)
 
     @Query("DELETE FROM currency_info")
-    suspend fun clear()
+    fun clear()
 }
