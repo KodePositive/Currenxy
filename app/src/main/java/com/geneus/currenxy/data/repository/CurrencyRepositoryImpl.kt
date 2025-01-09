@@ -16,11 +16,19 @@ class CurrencyRepositoryImpl(private val dao: CurrencyDao) : CurrencyRepository 
 
     override suspend fun insertCurrencies(currencies: List<CurrencyInfo>) {
         dao.insertAll(currencies.map {
-            CurrencyEntity(it.id, it.name, it.symbol, it.code)
+            CurrencyEntity(it.id, it.name, it.symbol, it.code, type = getCurrencyType(it.code))
         })
     }
 
     override suspend fun clearCurrencies() {
         dao.clear()
+    }
+
+    private fun getCurrencyType(code: String?): CurrencyType {
+        return if (code.isNullOrEmpty()) {
+            CurrencyType.CRYPTO
+        } else {
+            CurrencyType.FIAT
+        }
     }
 }
