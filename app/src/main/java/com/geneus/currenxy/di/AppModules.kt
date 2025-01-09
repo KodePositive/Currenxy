@@ -8,7 +8,9 @@ import com.geneus.currenxy.data.service.ApiService
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
+import com.geneus.currenxy.presentation.ui.CurrencyListViewModel
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -34,7 +36,7 @@ private fun Module.repoModule() {
 }
 
 private fun Module.viewmodelModule() {
-
+    viewModel { CurrencyListViewModel(get(), get(), get()) }
 }
 
 private fun Module.dbModule() {

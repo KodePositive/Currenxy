@@ -11,6 +11,7 @@ appcompat = "1.7.0"
 kotlinxCoroutinesAndroid = "1.7.3"
 lifecycleViewmodelKtx = "2.8.7"
 material = "1.12.0"
+mockk = "1.13.14"
 retrofit = "2.11.0"
 roomCompiler = "2.6.1"
 activity = "1.9.3"
@@ -30,6 +31,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
