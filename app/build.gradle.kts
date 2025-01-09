@@ -52,21 +52,23 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Koin
-    implementation (libs.koin.android)
+    implementation(libs.koin.android)
 
     // Retrofit & Gson
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     // Room
-    ksp (libs.androidx.room.compiler)
-    implementation (libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     // Lifecycle & ViewModel
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
-    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     // Coroutines
-    implementation (libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.android)
 
+    //gson
+    implementation(libs.gson)
 }

@@ -37,14 +37,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="Go to crypto currencies fragment" />
+            android:text="Show crypto currencies list" />
 
         <Button
             android:id="@+id/btnGotoFiatList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="Go to fiat currenciesfragment" />
+            android:text="Show to fiat currencies list" />
+
+        <Button
+            android:id="@+id/btnShowAllCurrencies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="Show all currencies list" />
 
     </LinearLayout>
 
