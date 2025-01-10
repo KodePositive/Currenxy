@@ -1,10 +1,13 @@
 package com.geneus.currenxy.presentation.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.geneus.currenxy.databinding.ActivityDemoBinding
 import com.geneus.currenxy.util.AssetsUtil
+import com.geneus.currenxy.util.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,6 +28,31 @@ class DemoActivity : AppCompatActivity() {
 
         binding.btnAddToDb.setOnClickListener {
             insertToDatabase()
+        }
+
+        binding.btnGotoCrytoList.setOnClickListener {
+            viewmodel.setQuery("BTC")
+            lifecycleScope.launch {
+                viewmodel.uiState
+                    .collect { result ->
+                        when (result.status) {
+                            Status.ERROR -> {
+                                Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
+                                Log.d("DemoActivity", "Error: ")
+                            }
+                            Status.LOADING -> {
+                                Toast.makeText(applicationContext, "Loading", Toast.LENGTH_SHORT).show()
+                                Log.d("DemoActivity", "Loading: ")
+                            }
+                            Status.SUCCESS -> {
+                                if(result.data?.isNotEmpty() == true)
+                                    Toast.makeText(applicationContext, "${result.data.first()}", Toast.LENGTH_SHORT).show()
+
+                                Log.d("DemoActivity", "Success: ")
+                            }
+                        }
+                    }
+            }
         }
     }
 

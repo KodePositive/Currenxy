@@ -7,7 +7,7 @@ import com.geneus.currenxy.domain.model.CurrencyInfo
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
-import com.geneus.currenxy.util.CurrencyUiState
+import com.geneus.currenxy.util.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -23,8 +23,8 @@ class CurrencyListViewModel(
     private val clearCurrenciesUseCase: ClearCurrenciesUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<CurrencyUiState>(CurrencyUiState.Loading)
-    val uiState: StateFlow<CurrencyUiState> = _uiState
+    private val _uiState = MutableStateFlow<UiState<List<CurrencyInfo>>>(UiState.loading(null))
+    val uiState: StateFlow<UiState<List<CurrencyInfo>>> = _uiState
 
     private val _query = MutableStateFlow("")
     private val _type = MutableStateFlow(CurrencyType.CRYPTO)
@@ -43,10 +43,10 @@ class CurrencyListViewModel(
                 .flattenMerge()
                 .onStart { emit(emptyList()) }
                 .catch { exception ->
-                    _uiState.value = CurrencyUiState.Error(exception.message ?: "Unknown error")
+                    _uiState.value = UiState.error(exception.message ?: "Unknown error", null)
                 }
                 .collect { result ->
-                    _uiState.value = CurrencyUiState.Success(result)
+                    _uiState.value = UiState.success(result)
                 }
         }
     }
