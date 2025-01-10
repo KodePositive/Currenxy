@@ -5,58 +5,102 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.geneus.currenxy.R
-import com.geneus.currenxy.presentation.ui.currencylist.placeholder.PlaceholderContent
+import com.geneus.currenxy.databinding.FragmentCurrencyListListBinding
+import com.geneus.currenxy.domain.model.CurrencyInfo
+import com.geneus.currenxy.util.Status
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+
 
 /**
  * A fragment representing a list of Items.
  */
 class CurrencyListFragment : Fragment() {
-
-    private var columnCount = 1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
+    companion object {
+        const val FRAGMENT_CRYPTO_LIST = "FRAGMENT_CRYPTO_LIST"
+        const val FRAGMENT_FIAT_LIST = "FRAGMENT_FIAT_LIST"
+        const val FRAGMENT_ALL_LIST = "FRAGMENT_ALL_LIST"
     }
+
+    private lateinit var binding: FragmentCurrencyListListBinding
+    private val viewmodel: CurrencyListViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_currency_list_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = CurrencyListRecyclerViewAdapter(PlaceholderContent.ITEMS)
-            }
-        }
-        return view
+    ): View {
+        binding = FragmentCurrencyListListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            viewmodel.uiState
+                .collect { result ->
+                    when (result.status) {
+                        Status.ERROR -> {
+                            hideLoader()
+                        }
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+                        Status.LOADING -> {
+                            showLoader()
+                        }
 
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            CurrencyListFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
+                        Status.SUCCESS -> {
+                            hideLoader()
+                            showCurrencyList(result.data)
+                        }
+                    }
                 }
-            }
+        }
+    }
+
+    private fun showLoader() {
+        binding.loader.apply {
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideLoader() {
+        binding.loader.apply {
+            visibility = View.GONE
+        }
+    }
+
+    private fun showEmptyState() {
+        binding.emptyList.emptyListContainer.apply {
+            visibility = View.VISIBLE
+        }
+
+        binding.rvCurrencies.apply {
+            visibility = View.GONE
+        }
+    }
+
+    private fun removeEmptyState() {
+        binding.emptyList.emptyListContainer.apply {
+            visibility = View.GONE
+        }
+
+        binding.rvCurrencies.apply {
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun showCurrencyList(currencyList: List<CurrencyInfo>?) {
+        if(currencyList.isNullOrEmpty()) {
+            showEmptyState()
+            return
+        }
+
+        removeEmptyState()
+
+        binding.rvCurrencies.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = CurrencyListRecyclerViewAdapter(currencyList)
+        }
     }
 }

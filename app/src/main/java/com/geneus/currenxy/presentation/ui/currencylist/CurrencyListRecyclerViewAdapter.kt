@@ -5,14 +5,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.geneus.currenxy.databinding.CurrencyItemBinding
-import com.geneus.currenxy.presentation.ui.currencylist.placeholder.PlaceholderContent.PlaceholderItem
+import com.geneus.currenxy.domain.model.CurrencyInfo
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class CurrencyListRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
+    private val values: List<CurrencyInfo>
 ) : RecyclerView.Adapter<CurrencyListRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,7 +26,7 @@ class CurrencyListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.contentView.text = item.name
     }
 
     override fun getItemCount(): Int = values.size
