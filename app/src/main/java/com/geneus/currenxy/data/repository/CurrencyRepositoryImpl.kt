@@ -24,6 +24,24 @@ class CurrencyRepositoryImpl(private val dao: CurrencyDao) : CurrencyRepository 
         dao.clear()
     }
 
+    override suspend fun getCryptoCurrencies(): Flow<List<CurrencyInfo>> {
+        return dao.getCrytoCurrenciesFlow().map { entities ->
+            entities.map { CurrencyInfo(it.id, it.name, it.symbol, it.code) }
+        }
+    }
+
+    override suspend fun getFiatCurrencies(): Flow<List<CurrencyInfo>> {
+        return dao.getFiatCurrenciesFlow().map { entities ->
+            entities.map { CurrencyInfo(it.id, it.name, it.symbol, it.code) }
+        }
+    }
+
+    override suspend fun getAllCurrencies(): Flow<List<CurrencyInfo>> {
+        return dao.getAllCurrenciesFlow().map { entities ->
+            entities.map { CurrencyInfo(it.id, it.name, it.symbol, it.code) }
+        }
+    }
+
     private fun getCurrencyType(code: String?): CurrencyType {
         return if (code.isNullOrEmpty()) {
             CurrencyType.CRYPTO

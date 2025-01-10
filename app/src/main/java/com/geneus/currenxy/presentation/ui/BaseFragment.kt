@@ -1,4 +1,4 @@
-package com.geneus.currenxy.presentation.ui.currencylist
+package com.geneus.currenxy.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.geneus.currenxy.data.db.CurrencyType
 import com.geneus.currenxy.databinding.FragmentCurrencyListListBinding
 import com.geneus.currenxy.domain.model.CurrencyInfo
+import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListRecyclerViewAdapter
+import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListViewModel
 import com.geneus.currenxy.util.Status
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -18,7 +20,7 @@ import org.koin.android.ext.android.inject
 /**
  * A fragment representing a list of Items.
  */
-class CurrencyListFragment : Fragment() {
+class BaseFragment : Fragment() {
     companion object {
         const val FRAGMENT_CRYPTO_LIST = "FRAGMENT_CRYPTO_LIST"
         const val FRAGMENT_FIAT_LIST = "FRAGMENT_FIAT_LIST"
@@ -41,7 +43,6 @@ class CurrencyListFragment : Fragment() {
         when(tag) {
             FRAGMENT_CRYPTO_LIST -> viewmodel.setType(CurrencyType.CRYPTO)
             FRAGMENT_FIAT_LIST -> viewmodel.setType(CurrencyType.FIAT)
-            FRAGMENT_ALL_LIST -> viewmodel.setType(CurrencyType.ALL)
         }
 
         lifecycleScope.launch {
@@ -65,19 +66,19 @@ class CurrencyListFragment : Fragment() {
         }
     }
 
-    private fun showLoader() {
+    open fun showLoader() {
         binding.loader.apply {
             visibility = View.VISIBLE
         }
     }
 
-    private fun hideLoader() {
+    open fun hideLoader() {
         binding.loader.apply {
             visibility = View.GONE
         }
     }
 
-    private fun showEmptyState() {
+    open fun showEmptyState() {
         binding.emptyList.emptyListContainer.apply {
             visibility = View.VISIBLE
         }
@@ -87,7 +88,7 @@ class CurrencyListFragment : Fragment() {
         }
     }
 
-    private fun removeEmptyState() {
+    open fun removeEmptyState() {
         binding.emptyList.emptyListContainer.apply {
             visibility = View.GONE
         }
@@ -97,7 +98,7 @@ class CurrencyListFragment : Fragment() {
         }
     }
 
-    private fun showCurrencyList(currencyList: List<CurrencyInfo>?) {
+    open fun showCurrencyList(currencyList: List<CurrencyInfo>?) {
         if(currencyList.isNullOrEmpty()) {
             showEmptyState()
             return

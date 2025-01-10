@@ -8,6 +8,16 @@ import kotlinx.coroutines.flow.Flow
 class GetCurrenciesUseCase(private val repository: CurrencyRepository) :
     UseCase<CurrencyType, Flow<List<CurrencyInfo>>> {
     override suspend fun execute(input: CurrencyType): Flow<List<CurrencyInfo>> {
-        return repository.getCurrenciesFlow(input)
+        return when(input) {
+            CurrencyType.CRYPTO -> {
+                repository.getCryptoCurrencies()
+            }
+            CurrencyType.FIAT -> {
+                repository.getFiatCurrencies()
+            }
+            CurrencyType.ALL -> {
+                repository.getAllCurrencies()
+            }
+        }
     }
 }

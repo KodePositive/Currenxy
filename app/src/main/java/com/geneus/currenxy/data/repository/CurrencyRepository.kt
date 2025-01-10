@@ -8,4 +8,7 @@ interface CurrencyRepository {
     suspend fun getCurrenciesFlow(type: CurrencyType): Flow<List<CurrencyInfo>>
     suspend fun insertCurrencies(currencies: List<CurrencyInfo>)
     suspend fun clearCurrencies()
+    suspend fun getCryptoCurrencies(): Flow<List<CurrencyInfo>>
+    suspend fun getFiatCurrencies(): Flow<List<CurrencyInfo>>
+    suspend fun getAllCurrencies(): Flow<List<CurrencyInfo>>
 }

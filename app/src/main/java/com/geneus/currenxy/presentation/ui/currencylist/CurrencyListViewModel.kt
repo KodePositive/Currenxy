@@ -41,7 +41,10 @@ class CurrencyListViewModel(
                 }
             }
                 .flattenMerge()
-                .onStart { emit(emptyList()) }
+                .onStart {
+                    _uiState.value = UiState.loading(data = null)
+                    emit(emptyList())
+                }
                 .catch { exception ->
                     _uiState.value = UiState.error(exception.message ?: "Unknown error", null)
                 }

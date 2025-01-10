@@ -13,6 +13,15 @@ interface CurrencyDao {
     @Query("SELECT * FROM currency_info WHERE type = :type")
     fun getCurrenciesFlow(type: CurrencyType): Flow<List<CurrencyEntity>>
 
+    @Query("SELECT * FROM currency_info WHERE type = 'CRYPTO'")
+    fun getCrytoCurrenciesFlow(): Flow<List<CurrencyEntity>>
+
+    @Query("SELECT * FROM currency_info WHERE type = 'FIAT'")
+    fun getFiatCurrenciesFlow(): Flow<List<CurrencyEntity>>
+
+    @Query("SELECT * FROM currency_info")
+    fun getAllCurrenciesFlow(): Flow<List<CurrencyEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(currencies: List<CurrencyEntity>)
 
