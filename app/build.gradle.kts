@@ -76,4 +76,7 @@ dependencies {
 
     //gson
     implementation(libs.gson)
+
+    /*smooth bottom bar*/
+    implementation(libs.smoothbottombar)
 }

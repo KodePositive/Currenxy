@@ -2,10 +2,14 @@ package com.geneus.currenxy.presentation.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.geneus.currenxy.R
 import com.geneus.currenxy.databinding.ActivityDemoBinding
 import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListFragment
 import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListViewModel
@@ -26,29 +30,48 @@ class DemoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDemoBinding
     private val viewmodel: CurrencyListViewModel by inject()
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_top_overflow, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menuClear -> {
+                clearDatabase()
+                true
+            }
+
+            R.id.menuInsert -> {
+                insertToDatabase()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnClearDb.setOnClickListener {
-            clearDatabase()
-        }
+        setFragment(FRAGMENT_CRYPTO_LIST)
+        binding.bottomBar.onItemSelected = {
+            when (it) {
+                0 -> {
+                    setFragment(FRAGMENT_CRYPTO_LIST)
+                }
 
-        binding.btnAddToDb.setOnClickListener {
-            insertToDatabase()
-        }
+                1 -> {
+                    setFragment(FRAGMENT_FIAT_LIST)
+                }
 
-        binding.btnGotoCrytoList.setOnClickListener {
-            setFragment(FRAGMENT_CRYPTO_LIST)
-        }
-
-        binding.btnGotoFiatList.setOnClickListener {
-            setFragment(FRAGMENT_FIAT_LIST)
-        }
-
-        binding.btnGotoFiatList.setOnClickListener {
-            setFragment(FRAGMENT_ALL_LIST)
+                2 -> {
+                    setFragment(FRAGMENT_ALL_LIST)
+                }
+            }
         }
 
         lifecycleScope.launch {
@@ -132,13 +155,17 @@ class DemoActivity : AppCompatActivity() {
                  * add the fragment to the manager if it doesn't not exist.
                  * */
                 when (fragmentToShowTag) {
-                    FRAGMENT_CRYPTO_LIST -> fragmentTransaction.add(
-                        binding.container, CurrencyListFragment(), FRAGMENT_CRYPTO_LIST
-                    )
+                    FRAGMENT_CRYPTO_LIST -> {
+                        fragmentTransaction.add(
+                            binding.container, CurrencyListFragment(), FRAGMENT_CRYPTO_LIST
+                        )
+                    }
 
-                    FRAGMENT_FIAT_LIST -> fragmentTransaction.add(
-                        binding.container, CurrencyListFragment(), FRAGMENT_FIAT_LIST
-                    )
+                    FRAGMENT_FIAT_LIST -> {
+                        fragmentTransaction.add(
+                            binding.container, CurrencyListFragment(), FRAGMENT_FIAT_LIST
+                        )
+                    }
 
                     FRAGMENT_ALL_LIST -> {
                         fragmentTransaction.add(
