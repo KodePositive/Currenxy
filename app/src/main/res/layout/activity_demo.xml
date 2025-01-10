@@ -22,35 +22,35 @@
             android:id="@+id/btnClearDb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="@dimen/margin_16"
             android:text="Clear local Database" />
 
         <Button
             android:id="@+id/btnAddToDb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="@dimen/margin_16"
             android:text="Insert local Database" />
 
         <Button
             android:id="@+id/btnGotoCrytoList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="@dimen/margin_16"
             android:text="Show crypto currencies list" />
 
         <Button
             android:id="@+id/btnGotoFiatList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="@dimen/margin_16"
             android:text="Show to fiat currencies list" />
 
         <Button
             android:id="@+id/btnShowAllCurrencies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="@dimen/margin_16"
             android:text="Show all currencies list" />
 
     </LinearLayout>
