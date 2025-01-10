@@ -41,13 +41,13 @@ class CurrencyListViewModel(
                     list.filter {
                         it.name.startsWith(query, true) ||
                                 it.symbol.startsWith(query, true) ||
+                                it.code?.startsWith(query, true) == true ||
                                 it.name.contains(" $query", true)
                     }
                 }
             }
                 .flattenMerge()
                 .onStart {
-                    _uiState.value = UiState.loading(data = null)
                     emit(emptyList())
                 }
                 .catch { exception ->
