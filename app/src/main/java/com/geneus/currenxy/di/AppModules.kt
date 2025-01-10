@@ -8,7 +8,7 @@ import com.geneus.currenxy.data.service.ApiService
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
-import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListViewModel
+import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module

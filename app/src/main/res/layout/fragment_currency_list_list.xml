@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".presentation.ui.currencylist.CurrencyListFragment"
+        tools:context=".presentation.ui.fragments.currencylist.CurrencyListFragment"
         tools:listitem="@layout/currency_item" />
 
     <include

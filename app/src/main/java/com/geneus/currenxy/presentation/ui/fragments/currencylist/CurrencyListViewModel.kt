@@ -1,4 +1,4 @@
-package com.geneus.currenxy.presentation.ui.currencylist
+package com.geneus.currenxy.presentation.ui.fragments.currencylist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

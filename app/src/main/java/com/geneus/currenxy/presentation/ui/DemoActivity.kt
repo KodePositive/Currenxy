@@ -8,13 +8,14 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.geneus.currenxy.R
-import com.geneus.currenxy.data.db.CurrencyType
 import com.geneus.currenxy.databinding.ActivityDemoBinding
-import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListFragment
-import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListFragment.Companion.FRAGMENT_ALL_LIST
-import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListFragment.Companion.FRAGMENT_CRYPTO_LIST
-import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListFragment.Companion.FRAGMENT_FIAT_LIST
-import com.geneus.currenxy.presentation.ui.currencylist.CurrencyListViewModel
+import com.geneus.currenxy.presentation.ui.fragments.AllCurrencyListFragment
+import com.geneus.currenxy.presentation.ui.fragments.CryptoCurrencyListFragment
+import com.geneus.currenxy.presentation.ui.fragments.FiatCurrencyListFragment
+import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListFragment.Companion.FRAGMENT_ALL_LIST
+import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListFragment.Companion.FRAGMENT_CRYPTO_LIST
+import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListFragment.Companion.FRAGMENT_FIAT_LIST
+import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListViewModel
 import com.geneus.currenxy.util.AssetsUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -123,24 +124,15 @@ class DemoActivity : AppCompatActivity() {
                  * */
                 when (fragmentToShowTag) {
                     FRAGMENT_CRYPTO_LIST -> {
-                        viewmodel.setType(CurrencyType.CRYPTO)
-                        fragmentTransaction.add(
-                            binding.container, CurrencyListFragment(), FRAGMENT_CRYPTO_LIST
-                        )
+                        fragmentTransaction.add(binding.container, CryptoCurrencyListFragment(), FRAGMENT_CRYPTO_LIST)
                     }
 
                     FRAGMENT_FIAT_LIST -> {
-                        fragmentTransaction.add(
-                            binding.container, CurrencyListFragment(), FRAGMENT_FIAT_LIST
-                        )
+                        fragmentTransaction.add(binding.container, FiatCurrencyListFragment(), FRAGMENT_FIAT_LIST)
                     }
 
                     FRAGMENT_ALL_LIST -> {
-                        fragmentTransaction.add(
-                            binding.container,
-                            CurrencyListFragment(),
-                            FRAGMENT_ALL_LIST
-                        )
+                        fragmentTransaction.add(binding.container, AllCurrencyListFragment(), FRAGMENT_ALL_LIST)
                     }
                 }
             }

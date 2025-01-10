@@ -1,4 +1,4 @@
-package com.geneus.currenxy.presentation.ui.currencylist
+package com.geneus.currenxy.presentation.ui.fragments.currencylist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

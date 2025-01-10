@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ivEmpty"
         android:layout_centerHorizontal="true"
-        android:text="Nothing to show here."
+        android:text="Nothing to see here."
         android:textSize="18sp"
         android:textStyle="bold" />
 
