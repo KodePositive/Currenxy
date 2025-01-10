@@ -44,6 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/ivSearch"
                 android:hint="Enter currency name."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
                 android:padding="8dp" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

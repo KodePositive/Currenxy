@@ -1,9 +1,13 @@
 package com.geneus.currenxy.presentation.ui.fragments.currencylist
 
+import android.app.Activity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +17,7 @@ import com.geneus.currenxy.presentation.ui.fragments.currencylist.adapter.Curren
 import com.geneus.currenxy.util.Status
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+
 
 open class CurrencyListFragment : Fragment() {
     companion object {
@@ -34,10 +39,7 @@ open class CurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getUiState()
-    }
 
-    private fun getUiState() {
         lifecycleScope.launch {
             viewmodel.uiState
                 .collect { result ->
@@ -56,6 +58,25 @@ open class CurrencyListFragment : Fragment() {
                         }
                     }
                 }
+        }
+
+        binding.etSearch.apply {
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {}
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    searchCurrency(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable) {
+
+                }
+            })
         }
     }
 
@@ -92,7 +113,7 @@ open class CurrencyListFragment : Fragment() {
     }
 
     open fun showCurrencyList(currencyList: List<CurrencyInfo>?) {
-        if(currencyList.isNullOrEmpty()) {
+        if (currencyList.isNullOrEmpty()) {
             showEmptyState()
             return
         }
@@ -103,5 +124,20 @@ open class CurrencyListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = CurrencyListRecyclerViewAdapter(currencyList)
         }
+    }
+
+    open fun searchCurrency(search: String) {
+        viewmodel.setQuery(search)
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        binding.etSearch.clearFocus()
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }
