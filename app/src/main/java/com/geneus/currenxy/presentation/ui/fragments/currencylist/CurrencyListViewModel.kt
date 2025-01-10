@@ -8,15 +8,20 @@ import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
 import com.geneus.currenxy.util.UiState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flattenMerge
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
+
+@OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class CurrencyListViewModel(
     private val getCurrenciesUseCase: GetCurrenciesUseCase,
     private val insertCurrenciesUseCase: InsertCurrenciesUseCase,
@@ -31,7 +36,7 @@ class CurrencyListViewModel(
 
     init {
         viewModelScope.launch {
-            combine(_type, _query) { type, query ->
+            combine(_type, _query.debounce(300).map { it.trim() }) { type, query ->
                 getCurrenciesUseCase.execute(type).map { list ->
                     list.filter {
                         it.name.startsWith(query, true) ||
