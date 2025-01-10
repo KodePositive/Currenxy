@@ -10,9 +10,43 @@
         android:name="com.geneus.currenxy.presentation.ui.currencylist.CurrencyListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/containerSearch"
         app:layoutManager="LinearLayoutManager"
         tools:context=".presentation.ui.fragments.currencylist.CurrencyListFragment"
         tools:listitem="@layout/currency_item" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/containerSearch"
+        style="@style/RoundedTopCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/margin_8dp"
+        app:cardBackgroundColor="@color/purple_200">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/ivSearch"
+                android:hint="Enter currency name."
+                android:padding="8dp" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <include
         android:id="@+id/emptyList"
@@ -21,5 +55,5 @@
     <ProgressBar
         android:id="@+id/loader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </RelativeLayout>
