@@ -78,6 +78,12 @@ open class CurrencyListFragment : Fragment() {
                 }
             })
         }
+
+        binding.ivCancel.apply {
+            setOnClickListener {
+                clearSearch()
+            }
+        }
     }
 
     open fun showLoader() {
@@ -130,14 +136,18 @@ open class CurrencyListFragment : Fragment() {
         viewmodel.setQuery(search)
     }
 
+    private fun hideKeyboard() {
+        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private fun clearSearch() {
+        binding.etSearch.text.clear()
+    }
+
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         binding.etSearch.clearFocus()
         hideKeyboard()
-    }
-
-    private fun hideKeyboard() {
-        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

@@ -42,12 +42,24 @@
                 android:id="@+id/etSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_toStartOf="@id/ivCancel"
                 android:layout_toEndOf="@+id/ivSearch"
                 android:hint="Enter currency name."
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/ivCancel"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_cancel" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
