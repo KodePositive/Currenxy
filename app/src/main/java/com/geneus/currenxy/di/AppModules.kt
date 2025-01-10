@@ -4,7 +4,6 @@ import androidx.room.Room
 import com.geneus.currenxy.data.db.AppDatabase
 import com.geneus.currenxy.data.repository.CurrencyRepository
 import com.geneus.currenxy.data.repository.CurrencyRepositoryImpl
-import com.geneus.currenxy.data.service.ApiService
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
@@ -12,8 +11,6 @@ import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListVi
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 val appModules = module {
     networkModule()
@@ -45,11 +42,4 @@ private fun Module.dbModule() {
 }
 
 private fun Module.networkModule() {
-    single {
-        Retrofit.Builder()
-            .baseUrl("")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
-    }
 }

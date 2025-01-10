@@ -1,6 +1,5 @@
 [versions]
 agp = "8.5.2"
-converterGson = "2.9.0"
 gson = "2.10.1"
 koinAndroid = "4.0.0"
 kotlin = "2.0.21"
@@ -13,7 +12,6 @@ kotlinxCoroutinesAndroid = "1.7.3"
 lifecycleViewmodelKtx = "2.8.7"
 material = "1.12.0"
 mockk = "1.13.14"
-retrofit = "2.11.0"
 roomCompiler = "2.6.1"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
@@ -27,7 +25,6 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomCompiler" }
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -37,7 +34,6 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndr
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }

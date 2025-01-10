@@ -59,10 +59,6 @@ dependencies {
     // Koin
     implementation(libs.koin.android)
 
-    // Retrofit & Gson
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-
     // Room
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
