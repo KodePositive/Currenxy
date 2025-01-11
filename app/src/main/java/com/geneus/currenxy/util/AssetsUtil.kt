@@ -8,12 +8,12 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 object AssetsUtil {
-    fun readJsonFromAssets( context: Context, fileName: String): List<CurrencyInfo> {
+    fun <T> readJsonFromAssets( context: Context, fileName: String): List<T> {
         val inputStream = context.assets.open(fileName)
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
         val jsonString = bufferedReader.use { it.readText() }
         val gson = Gson()
-        val type = object : TypeToken<List<CurrencyInfo>>() {}.type
+        val type = object : TypeToken<List<T>>() {}.type
         return gson.fromJson(jsonString, type)
     }
 }
