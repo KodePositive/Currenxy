@@ -84,7 +84,7 @@ class DemoActivity : AppCompatActivity() {
             withContext(Dispatchers.IO) {
                 //inserts crypto list: listA.json
                 viewmodel.insertCurrencies(
-                    AssetsUtil.readJsonFromAssets(
+                    AssetsUtil.getCurrencyListFromJson(
                         context = applicationContext,
                         fileName = "listA.json"
                     )
@@ -92,7 +92,7 @@ class DemoActivity : AppCompatActivity() {
 
                 //inserts crypto list: listA.json
                 viewmodel.insertCurrencies(
-                    AssetsUtil.readJsonFromAssets(
+                    AssetsUtil.getCurrencyListFromJson(
                         context = applicationContext,
                         fileName = "listB.json"
                     )
