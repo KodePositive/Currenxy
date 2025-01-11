@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.geneus.currenxy.data.db.CurrencyType
 import com.geneus.currenxy.databinding.FragmentCurrencyListListBinding
 import com.geneus.currenxy.domain.model.CurrencyInfo
 import com.geneus.currenxy.presentation.ui.fragments.currencylist.adapter.CurrencyListRecyclerViewAdapter
@@ -19,15 +20,15 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 
-open class CurrencyListFragment : Fragment() {
+open class CurrencyListFragment : Fragment(), CurrencyList {
     companion object {
         const val FRAGMENT_CRYPTO_LIST = "FRAGMENT_CRYPTO_LIST"
         const val FRAGMENT_FIAT_LIST = "FRAGMENT_FIAT_LIST"
         const val FRAGMENT_ALL_LIST = "FRAGMENT_ALL_LIST"
     }
 
-    internal lateinit var binding: FragmentCurrencyListListBinding
-    internal val viewmodel: CurrencyListViewModel by inject()
+    private lateinit var binding: FragmentCurrencyListListBinding
+    private val viewmodel: CurrencyListViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,26 +40,6 @@ open class CurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        lifecycleScope.launch {
-            viewmodel.uiState
-                .collect { result ->
-                    when (result.status) {
-                        Status.ERROR -> {
-                            hideLoader()
-                        }
-
-                        Status.LOADING -> {
-                            showLoader()
-                        }
-
-                        Status.SUCCESS -> {
-                            hideLoader()
-                            showCurrencyList(result.data)
-                        }
-                    }
-                }
-        }
 
         binding.etSearch.apply {
             addTextChangedListener(object : TextWatcher {
@@ -86,19 +67,19 @@ open class CurrencyListFragment : Fragment() {
         }
     }
 
-    open fun showLoader() {
+    override fun showLoader() {
         binding.loader.apply {
             visibility = View.VISIBLE
         }
     }
 
-    open fun hideLoader() {
+    override fun hideLoader() {
         binding.loader.apply {
             visibility = View.GONE
         }
     }
 
-    open fun showEmptyState() {
+    override fun showEmptyState() {
         binding.emptyList.emptyListContainer.apply {
             visibility = View.VISIBLE
         }
@@ -108,23 +89,50 @@ open class CurrencyListFragment : Fragment() {
         }
     }
 
-    open fun removeEmptyState() {
+    override fun hideEmptyState() {
         binding.emptyList.emptyListContainer.apply {
             visibility = View.GONE
         }
 
         binding.rvCurrencies.apply {
             visibility = View.VISIBLE
+        }
+    }
+
+    override fun setCurrencyList(currencyType: CurrencyType) {
+        viewmodel.setType(currencyType)
+        lifecycleScope.launch {
+            viewmodel.uiState
+                .collect { result ->
+                    when (result.status) {
+                        Status.ERROR -> {
+                            hideLoader()
+                        }
+
+                        Status.LOADING -> {
+                            showLoader()
+                        }
+
+                        Status.SUCCESS -> {
+                            hideLoader()
+                            showCurrencyList(result.data)
+                        }
+                    }
+                }
         }
     }
 
     open fun showCurrencyList(currencyList: List<CurrencyInfo>?) {
+        /** Open this function to override.
+         * Provides child classes flexibility to set its own list.
+         * */
+
         if (currencyList.isNullOrEmpty()) {
             showEmptyState()
             return
         }
 
-        removeEmptyState()
+        hideEmptyState()
 
         binding.rvCurrencies.apply {
             layoutManager = LinearLayoutManager(context)
@@ -132,16 +140,11 @@ open class CurrencyListFragment : Fragment() {
         }
     }
 
-    open fun searchCurrency(search: String) {
+    override fun searchCurrency(search: String) {
         viewmodel.setQuery(search)
     }
 
-    private fun hideKeyboard() {
-        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
-    }
-
-    private fun clearSearch() {
+    override fun clearSearch() {
         binding.etSearch.text.clear()
     }
 
@@ -149,5 +152,10 @@ open class CurrencyListFragment : Fragment() {
         super.onHiddenChanged(hidden)
         binding.etSearch.clearFocus()
         hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

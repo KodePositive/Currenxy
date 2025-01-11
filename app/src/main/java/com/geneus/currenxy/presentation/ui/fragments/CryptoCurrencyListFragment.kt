@@ -8,6 +8,6 @@ import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListFr
 class CryptoCurrencyListFragment : CurrencyListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewmodel.setType(CurrencyType.CRYPTO)
+        setCurrencyList(CurrencyType.CRYPTO)
     }
 }

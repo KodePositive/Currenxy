@@ -8,6 +8,6 @@ import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListFr
 class AllCurrencyListFragment : CurrencyListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewmodel.setType(CurrencyType.ALL)
+        setCurrencyList(CurrencyType.ALL)
     }
 }
