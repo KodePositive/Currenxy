@@ -7,6 +7,7 @@ import com.geneus.currenxy.data.repository.CurrencyRepositoryImpl
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
+import com.geneus.currenxy.presentation.ui.DemoSharedViewModel
 import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
@@ -34,6 +35,7 @@ private fun Module.repoModule() {
 
 private fun Module.viewmodelModule() {
     viewModel { CurrencyListViewModel(get(), get(), get()) }
+    viewModel { DemoSharedViewModel() }
 }
 
 private fun Module.dbModule() {

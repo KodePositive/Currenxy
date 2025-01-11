@@ -8,6 +8,5 @@ interface CurrencyList {
     fun showEmptyState()
     fun hideEmptyState()
     fun searchCurrency(search: String)
-    fun clearSearch()
     fun setCurrencyList(currencyType: CurrencyType)
 }

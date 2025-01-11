@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +11,54 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar" />
+        android:layout_above="@+id/containerSearch" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/containerSearch"
+        style="@style/RoundedTopCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomBar"
+        android:layout_marginHorizontal="@dimen/margin_8dp"
+        app:cardBackgroundColor="@color/purple_200">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_toStartOf="@id/ivCancel"
+                android:layout_toEndOf="@+id/ivSearch"
+                android:hint="Enter currency name."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/ivCancel"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_cancel" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottomBar"

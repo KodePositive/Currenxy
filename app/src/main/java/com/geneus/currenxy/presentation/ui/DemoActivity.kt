@@ -1,6 +1,8 @@
 package com.geneus.currenxy.presentation.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -25,6 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DemoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDemoBinding
     private val viewmodel: CurrencyListViewModel by viewModel()
+    private val sharedVm: DemoSharedViewModel by viewModel()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -52,7 +55,7 @@ class DemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setSearchView()
         setFragment(FRAGMENT_CRYPTO_LIST)
         binding.bottomBar.onItemSelected = {
             when (it) {
@@ -147,5 +150,36 @@ class DemoActivity : AppCompatActivity() {
         }
 
         fragmentTransaction.commit()
+    }
+
+    private fun setSearchView() {
+        binding.ivCancel.apply {
+            setOnClickListener {
+                clearSearch()
+            }
+        }
+
+        binding.etSearch.apply {
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {}
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    sharedVm.setSearchQuery(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable) {
+
+                }
+            })
+        }
+    }
+
+    private fun clearSearch() {
+        binding.etSearch.text.clear()
     }
 }
