@@ -20,11 +20,11 @@ import com.geneus.currenxy.util.AssetsUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DemoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDemoBinding
-    private val viewmodel: CurrencyListViewModel by inject()
+    private val viewmodel: CurrencyListViewModel by viewModel()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater

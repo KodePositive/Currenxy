@@ -17,7 +17,7 @@ import com.geneus.currenxy.domain.model.CurrencyInfo
 import com.geneus.currenxy.presentation.ui.fragments.currencylist.adapter.CurrencyListRecyclerViewAdapter
 import com.geneus.currenxy.util.Status
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 open class CurrencyListFragment : Fragment(), CurrencyList {
@@ -28,7 +28,7 @@ open class CurrencyListFragment : Fragment(), CurrencyList {
     }
 
     private lateinit var binding: FragmentCurrencyListListBinding
-    private val viewmodel: CurrencyListViewModel by inject()
+    private val viewmodel: CurrencyListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
