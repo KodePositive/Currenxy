@@ -23,9 +23,9 @@ val appModules = module {
 }
 
 private fun Module.useCaseModule() {
-    single { ClearCurrenciesUseCase(get()) }
-    single { GetCurrenciesUseCase(get()) }
-    single { InsertCurrenciesUseCase(get()) }
+    factory { ClearCurrenciesUseCase(get()) }
+    factory { GetCurrenciesUseCase(get()) }
+    factory { InsertCurrenciesUseCase(get()) }
 }
 
 
