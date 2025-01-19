@@ -9,7 +9,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.geneus.currenxy.data.db.CurrencyType
 import com.geneus.currenxy.databinding.FragmentCurrencyListListBinding
 import com.geneus.currenxy.domain.model.CurrencyInfo
 import com.geneus.currenxy.presentation.ui.DemoSharedViewModel
@@ -20,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-open class CurrencyListFragment : Fragment(), CurrencyList {
+internal open class CurrencyListFragment : Fragment(), CurrencyList {
     companion object {
         const val FRAGMENT_CRYPTO_LIST = "FRAGMENT_CRYPTO_LIST"
         const val FRAGMENT_FIAT_LIST = "FRAGMENT_FIAT_LIST"
@@ -87,8 +86,8 @@ open class CurrencyListFragment : Fragment(), CurrencyList {
         }
     }
 
-    override fun setCurrencyList(currencyType: CurrencyType) {
-        viewmodel.setType(currencyType)
+    override fun setCurrencyList(currencyListType: CurrencyListType) {
+        viewmodel.setType(currencyListType)
         lifecycleScope.launch {
             viewmodel.uiState
                 .collect { result ->

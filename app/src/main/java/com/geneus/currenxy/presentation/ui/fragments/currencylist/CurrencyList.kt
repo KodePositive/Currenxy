@@ -1,12 +1,10 @@
 package com.geneus.currenxy.presentation.ui.fragments.currencylist
 
-import com.geneus.currenxy.data.db.CurrencyType
-
-interface CurrencyList {
+internal interface CurrencyList {
     fun showLoader()
     fun hideLoader()
     fun showEmptyState()
     fun hideEmptyState()
     fun searchCurrency(search: String)
-    fun setCurrencyList(currencyType: CurrencyType)
+    fun setCurrencyList(currencyListType: CurrencyListType)
 }

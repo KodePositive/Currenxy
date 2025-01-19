@@ -1,6 +1,5 @@
 package com.geneus.currenxy.domain.usecase
 
-import com.geneus.currenxy.data.db.CurrencyType
 import com.geneus.currenxy.data.repository.CurrencyRepository
 import com.geneus.currenxy.domain.model.CurrencyInfo
 import io.mockk.coEvery
@@ -11,11 +10,11 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class GetCurrenciesUseCaseTests() {
+class GetCurrenciesUseCaseTests {
     @Test
     fun `verify getCryptoCurrencies returns cryptocurrency list`() = runBlocking {
         val repository: CurrencyRepository = mockk()
-        val useCase = GetCurrenciesUseCase(repository)
+        val useCase = GetCryptoCurrenciesUseCase(repository)
 
         coEvery { repository.getCryptoCurrencies() } returns flowOf(
             listOf(
@@ -24,14 +23,14 @@ class GetCurrenciesUseCaseTests() {
             )
         )
 
-        val result = useCase.execute(CurrencyType.CRYPTO).first()
+        val result = useCase.execute().first()
         assertEquals(2, result.size)
     }
 
     @Test
-    fun `verify getFiatCurrencies returns fiatcurrency list`() = runBlocking {
+    fun `verify getFiatCurrencies returns fiat currency list`() = runBlocking {
         val repository: CurrencyRepository = mockk()
-        val useCase = GetCurrenciesUseCase(repository)
+        val useCase = GetFiatCurrenciesUseCase(repository)
 
         coEvery { repository.getFiatCurrencies() } returns flowOf(
             listOf(
@@ -41,14 +40,14 @@ class GetCurrenciesUseCaseTests() {
             )
         )
 
-        val result = useCase.execute(CurrencyType.FIAT).first()
+        val result = useCase.execute().first()
         assertEquals(3, result.size)
     }
 
     @Test
     fun `verify getAllCurrencies returns all currency list`() = runBlocking {
         val repository: CurrencyRepository = mockk()
-        val useCase = GetCurrenciesUseCase(repository)
+        val useCase = GetAllCurrenciesUseCase(repository)
 
         coEvery { repository.getAllCurrencies() } returns flowOf(
             listOf(
@@ -60,7 +59,7 @@ class GetCurrenciesUseCaseTests() {
             )
         )
 
-        val result = useCase.execute(CurrencyType.ALL).first()
+        val result = useCase.execute().first()
         assertEquals(5, result.size)
     }
 }

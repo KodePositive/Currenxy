@@ -2,10 +2,11 @@ package com.geneus.currenxy.presentation.ui.fragments.currencylist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.geneus.currenxy.data.db.CurrencyType
 import com.geneus.currenxy.domain.model.CurrencyInfo
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
+import com.geneus.currenxy.domain.usecase.GetAllCurrenciesUseCase
+import com.geneus.currenxy.domain.usecase.GetCryptoCurrenciesUseCase
+import com.geneus.currenxy.domain.usecase.GetFiatCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
 import com.geneus.currenxy.util.UiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,22 +23,28 @@ import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-class CurrencyListViewModel(
-    private val getCurrenciesUseCase: GetCurrenciesUseCase,
+internal class CurrencyListViewModel(
     private val insertCurrenciesUseCase: InsertCurrenciesUseCase,
-    private val clearCurrenciesUseCase: ClearCurrenciesUseCase
+    private val clearCurrenciesUseCase: ClearCurrenciesUseCase,
+    private val getCryptoCurrenciesUseCase: GetCryptoCurrenciesUseCase,
+    private val getFiatCurrenciesUseCase: GetFiatCurrenciesUseCase,
+    private val getAllCurrenciesUseCase: GetAllCurrenciesUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<CurrencyInfo>>>(UiState.loading(null))
     val uiState: StateFlow<UiState<List<CurrencyInfo>>> = _uiState
 
     private val _query = MutableStateFlow("")
-    private val _type = MutableStateFlow(CurrencyType.CRYPTO)
+    private val _type = MutableStateFlow(CurrencyListType.CRYPTO)
 
     init {
         viewModelScope.launch {
             combine(_type, _query.debounce(300).map { it.trim() }) { type, query ->
-                getCurrenciesUseCase.execute(type).map { list ->
+                when (type) {
+                    CurrencyListType.CRYPTO -> getCryptoCurrenciesUseCase
+                    CurrencyListType.FIAT -> getFiatCurrenciesUseCase
+                    CurrencyListType.ALL -> getAllCurrenciesUseCase
+                }.execute(Unit).map { list ->
                     list.filter {
                         it.name.startsWith(query, true) ||
                                 it.symbol.startsWith(query, true) ||
@@ -64,8 +71,8 @@ class CurrencyListViewModel(
         _query.value = query
     }
 
-    fun setType(currencyType: CurrencyType) {
-        _type.value = currencyType
+    fun setType(currencyListType: CurrencyListType) {
+        _type.value = currencyListType
     }
 
     suspend fun insertCurrencies(currencies: List<CurrencyInfo>) {

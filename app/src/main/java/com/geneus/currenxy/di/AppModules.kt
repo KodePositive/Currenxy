@@ -5,7 +5,9 @@ import com.geneus.currenxy.data.db.AppDatabase
 import com.geneus.currenxy.data.repository.CurrencyRepository
 import com.geneus.currenxy.data.repository.CurrencyRepositoryImpl
 import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetCurrenciesUseCase
+import com.geneus.currenxy.domain.usecase.GetAllCurrenciesUseCase
+import com.geneus.currenxy.domain.usecase.GetCryptoCurrenciesUseCase
+import com.geneus.currenxy.domain.usecase.GetFiatCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
 import com.geneus.currenxy.presentation.ui.DemoSharedViewModel
 import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListViewModel
@@ -24,8 +26,10 @@ val appModules = module {
 
 private fun Module.useCaseModule() {
     factory { ClearCurrenciesUseCase(get()) }
-    factory { GetCurrenciesUseCase(get()) }
     factory { InsertCurrenciesUseCase(get()) }
+    factory { GetCryptoCurrenciesUseCase(get()) }
+    factory { GetFiatCurrenciesUseCase(get()) }
+    factory { GetAllCurrenciesUseCase(get()) }
 }
 
 
@@ -34,7 +38,7 @@ private fun Module.repoModule() {
 }
 
 private fun Module.viewmodelModule() {
-    viewModel { CurrencyListViewModel(get(), get(), get()) }
+    viewModel { CurrencyListViewModel(get(), get(), get(), get(), get()) }
     viewModel { DemoSharedViewModel() }
 }
 
