@@ -75,4 +75,10 @@ dependencies {
 
     /*smooth bottom bar*/
     implementation(libs.smoothbottombar)
+
+    //cashapp - turbine for flow tests
+    testImplementation(libs.turbine)
+
+    //coroutine tests
+    testImplementation(libs.kotlinx.coroutines.test)
 }
