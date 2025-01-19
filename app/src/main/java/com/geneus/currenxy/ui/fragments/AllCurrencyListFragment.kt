@@ -1,9 +1,9 @@
-package com.geneus.currenxy.presentation.ui.fragments
+package com.geneus.currenxy.ui.fragments
 
 import android.os.Bundle
 import android.view.View
-import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListFragment
-import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListType
+import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListFragment
+import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListType
 
 internal class AllCurrencyListFragment : CurrencyListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

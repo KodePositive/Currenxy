@@ -6,10 +6,10 @@ enum class Status {
     LOADING
 }
 
-data class UiState<out T>(val status: Status, val data: T?, val message: String?) {
+data class UiState<out T>(val status: Status, val data: T?, val message: String? = null) {
     companion object {
         fun <T> success(data: T?): UiState<T> {
-            return UiState(Status.SUCCESS, data, null)
+            return UiState(Status.SUCCESS, data)
         }
 
         fun <T> error(msg: String, data: T?): UiState<T> {
@@ -17,7 +17,7 @@ data class UiState<out T>(val status: Status, val data: T?, val message: String?
         }
 
         fun <T> loading(data: T?): UiState<T> {
-            return UiState(Status.LOADING, data, null)
+            return UiState(Status.LOADING, data)
         }
     }
 }

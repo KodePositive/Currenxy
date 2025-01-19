@@ -1,4 +1,4 @@
-package com.geneus.currenxy.presentation.ui.fragments.currencylist
+package com.geneus.currenxy.ui.fragments.currencylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geneus.currenxy.databinding.FragmentCurrencyListListBinding
 import com.geneus.currenxy.domain.model.CurrencyInfo
-import com.geneus.currenxy.presentation.ui.DemoSharedViewModel
-import com.geneus.currenxy.presentation.ui.fragments.currencylist.adapter.CurrencyListRecyclerViewAdapter
+import com.geneus.currenxy.ui.DemoSharedViewModel
+import com.geneus.currenxy.ui.fragments.currencylist.adapter.CurrencyListRecyclerViewAdapter
 import com.geneus.currenxy.util.Status
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel

@@ -9,8 +9,8 @@ import com.geneus.currenxy.domain.usecase.GetAllCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetCryptoCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.GetFiatCurrenciesUseCase
 import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
-import com.geneus.currenxy.presentation.ui.DemoSharedViewModel
-import com.geneus.currenxy.presentation.ui.fragments.currencylist.CurrencyListViewModel
+import com.geneus.currenxy.ui.DemoSharedViewModel
+import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
