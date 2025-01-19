@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-object AssetsUtil {
+internal object AssetsUtil {
     fun getCurrencyListFromJson(context: Context, fileName: String): List<CurrencyInfo> {
         val inputStream = context.assets.open(fileName)
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
