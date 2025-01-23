@@ -22,42 +22,9 @@
         android:layout_marginHorizontal="@dimen/margin_8dp"
         app:cardBackgroundColor="@color/purple_200">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
-
-            <ImageView
-                android:id="@+id/ivSearch"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:padding="2dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_search" />
-
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_toStartOf="@id/ivCancel"
-                android:layout_toEndOf="@+id/ivSearch"
-                android:hint="Enter currency name."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:padding="8dp" />
-
-            <ImageView
-                android:id="@+id/ivCancel"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:padding="2dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_cancel" />
-        </RelativeLayout>
+        <include
+            android:id="@+id/searchLayout"
+            layout="@layout/layout_search"/>
     </com.google.android.material.card.MaterialCardView>
 
     <me.ibrahimsn.lib.SmoothBottomBar

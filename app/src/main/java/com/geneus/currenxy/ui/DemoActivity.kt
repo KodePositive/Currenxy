@@ -125,15 +125,27 @@ class DemoActivity : AppCompatActivity() {
                  * */
                 when (currencyListType) {
                     CurrencyListType.CRYPTO -> {
-                        fragmentTransaction.add(binding.container, CryptoCurrencyListFragment(), currencyListType.name) //tag: CRYPTO
+                        fragmentTransaction.add(
+                            binding.container,
+                            CryptoCurrencyListFragment(),
+                            currencyListType.name
+                        ) //tag: CRYPTO
                     }
 
                     CurrencyListType.FIAT -> {
-                        fragmentTransaction.add(binding.container, FiatCurrencyListFragment(), currencyListType.name) //tag: FIAT
+                        fragmentTransaction.add(
+                            binding.container,
+                            FiatCurrencyListFragment(),
+                            currencyListType.name
+                        ) //tag: FIAT
                     }
 
                     CurrencyListType.ALL -> {
-                        fragmentTransaction.add(binding.container, AllCurrencyListFragment(), currencyListType.name) //tag: ALL
+                        fragmentTransaction.add(
+                            binding.container,
+                            AllCurrencyListFragment(),
+                            currencyListType.name
+                        ) //tag: ALL
                     }
                 }
             }
@@ -151,20 +163,21 @@ class DemoActivity : AppCompatActivity() {
     }
 
     private fun setSearchView() {
-        binding.ivCancel.apply {
+        binding.searchLayout.ivCancel.apply {
             setOnClickListener {
                 clearSearch()
             }
         }
 
-        binding.etSearch.apply {
+        binding.searchLayout.etSearch.apply {
             addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence,
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     sharedVm.setSearchQuery(s.toString())
@@ -178,6 +191,6 @@ class DemoActivity : AppCompatActivity() {
     }
 
     private fun clearSearch() {
-        binding.etSearch.text.clear()
+        binding.searchLayout.etSearch.text.clear()
     }
 }
