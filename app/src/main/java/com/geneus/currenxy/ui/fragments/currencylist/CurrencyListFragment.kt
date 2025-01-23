@@ -20,12 +20,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 internal open class CurrencyListFragment : Fragment(), CurrencyList {
-    companion object {
-        const val FRAGMENT_CRYPTO_LIST = "FRAGMENT_CRYPTO_LIST"
-        const val FRAGMENT_FIAT_LIST = "FRAGMENT_FIAT_LIST"
-        const val FRAGMENT_ALL_LIST = "FRAGMENT_ALL_LIST"
-    }
-
     private lateinit var binding: FragmentCurrencyListListBinding
     private val viewmodel: CurrencyListViewModel by viewModel()
     private val sharedViewModel: DemoSharedViewModel by activityViewModel()

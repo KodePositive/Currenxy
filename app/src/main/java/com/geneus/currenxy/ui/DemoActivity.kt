@@ -14,9 +14,7 @@ import com.geneus.currenxy.databinding.ActivityDemoBinding
 import com.geneus.currenxy.ui.fragments.AllCurrencyListFragment
 import com.geneus.currenxy.ui.fragments.CryptoCurrencyListFragment
 import com.geneus.currenxy.ui.fragments.FiatCurrencyListFragment
-import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListFragment.Companion.FRAGMENT_ALL_LIST
-import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListFragment.Companion.FRAGMENT_CRYPTO_LIST
-import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListFragment.Companion.FRAGMENT_FIAT_LIST
+import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListType
 import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListViewModel
 import com.geneus.currenxy.util.AssetsUtil
 import kotlinx.coroutines.Dispatchers
@@ -56,19 +54,19 @@ class DemoActivity : AppCompatActivity() {
         binding = ActivityDemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSearchView()
-        setFragment(FRAGMENT_CRYPTO_LIST)
+        setFragment(CurrencyListType.CRYPTO)
         binding.bottomBar.onItemSelected = {
             when (it) {
                 0 -> {
-                    setFragment(FRAGMENT_CRYPTO_LIST)
+                    setFragment(CurrencyListType.CRYPTO)
                 }
 
                 1 -> {
-                    setFragment(FRAGMENT_FIAT_LIST)
+                    setFragment(CurrencyListType.FIAT)
                 }
 
                 2 -> {
-                    setFragment(FRAGMENT_ALL_LIST)
+                    setFragment(CurrencyListType.ALL)
                 }
             }
         }
@@ -104,14 +102,14 @@ class DemoActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment(fragmentToShowTag: String) {
+    private fun setFragment(currencyListType: CurrencyListType) {
         binding.container.apply {
             visibility = View.VISIBLE
         }
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val fragmentToShow = supportFragmentManager.findFragmentByTag(fragmentToShowTag)
+        val fragmentToShow = supportFragmentManager.findFragmentByTag(currencyListType.name)
 
         /**
          * show the intended fragment
@@ -125,17 +123,17 @@ class DemoActivity : AppCompatActivity() {
                 /**
                  * add the fragment to the manager if it doesn't not exist.
                  * */
-                when (fragmentToShowTag) {
-                    FRAGMENT_CRYPTO_LIST -> {
-                        fragmentTransaction.add(binding.container, CryptoCurrencyListFragment(), FRAGMENT_CRYPTO_LIST)
+                when (currencyListType) {
+                    CurrencyListType.CRYPTO -> {
+                        fragmentTransaction.add(binding.container, CryptoCurrencyListFragment(), currencyListType.name) //tag: CRYPTO
                     }
 
-                    FRAGMENT_FIAT_LIST -> {
-                        fragmentTransaction.add(binding.container, FiatCurrencyListFragment(), FRAGMENT_FIAT_LIST)
+                    CurrencyListType.FIAT -> {
+                        fragmentTransaction.add(binding.container, FiatCurrencyListFragment(), currencyListType.name) //tag: FIAT
                     }
 
-                    FRAGMENT_ALL_LIST -> {
-                        fragmentTransaction.add(binding.container, AllCurrencyListFragment(), FRAGMENT_ALL_LIST)
+                    CurrencyListType.ALL -> {
+                        fragmentTransaction.add(binding.container, AllCurrencyListFragment(), currencyListType.name) //tag: ALL
                     }
                 }
             }
