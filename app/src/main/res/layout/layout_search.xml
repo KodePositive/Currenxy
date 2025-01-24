@@ -19,7 +19,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_toStartOf="@id/ivCancel"
         android:layout_toEndOf="@+id/ivSearch"
-        android:hint="Enter currency name."
+        android:hint="Search Currency"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:maxLines="1"
