@@ -23,10 +23,10 @@
         app:cardBackgroundColor="@color/purple_200">
 
         <androidx.appcompat.widget.SearchView
-            android:padding="@dimen/margin_8dp"
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/margin_8dp"
             app:iconifiedByDefault="false"
             app:queryHint="Search currencies" />
     </com.google.android.material.card.MaterialCardView>
