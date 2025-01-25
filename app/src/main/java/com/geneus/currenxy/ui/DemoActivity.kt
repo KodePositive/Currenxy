@@ -1,13 +1,12 @@
 package com.geneus.currenxy.ui
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import com.geneus.currenxy.R
 import com.geneus.currenxy.databinding.ActivityDemoBinding
@@ -21,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DemoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDemoBinding
@@ -163,34 +163,15 @@ class DemoActivity : AppCompatActivity() {
     }
 
     private fun setSearchView() {
-        binding.searchLayout.ivCancel.apply {
-            setOnClickListener {
-                clearSearch()
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
             }
-        }
 
-        binding.searchLayout.etSearch.apply {
-            addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    sharedVm.setSearchQuery(s.toString())
-                }
-
-                override fun afterTextChanged(s: Editable) {
-
-                }
-            })
-        }
-    }
-
-    private fun clearSearch() {
-        binding.searchLayout.etSearch.text.clear()
+            override fun onQueryTextChange(newText: String?): Boolean {
+                sharedVm.setSearchQuery(newText?: "")
+                return false
+            }
+        })
     }
 }

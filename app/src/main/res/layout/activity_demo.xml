@@ -22,9 +22,13 @@
         android:layout_marginHorizontal="@dimen/margin_8dp"
         app:cardBackgroundColor="@color/purple_200">
 
-        <include
-            android:id="@+id/searchLayout"
-            layout="@layout/layout_search"/>
+        <androidx.appcompat.widget.SearchView
+            android:padding="@dimen/margin_8dp"
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            app:queryHint="Search currencies" />
     </com.google.android.material.card.MaterialCardView>
 
     <me.ibrahimsn.lib.SmoothBottomBar
