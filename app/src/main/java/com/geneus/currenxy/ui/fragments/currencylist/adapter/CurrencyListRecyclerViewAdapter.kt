@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.geneus.currenxy.databinding.CurrencyItemBinding
-import com.geneus.currenxy.domain.model.CurrencyInfo
+import com.geneus.domain.model.CurrencyInfo
 
 internal class CurrencyListRecyclerViewAdapter(
     private val values: List<CurrencyInfo>

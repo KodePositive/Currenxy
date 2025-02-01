@@ -2,13 +2,13 @@ package com.geneus.currenxy.ui.fragments.currencylist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.geneus.currenxy.domain.model.CurrencyInfo
-import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetAllCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetCryptoCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetFiatCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
 import com.geneus.currenxy.util.UiState
+import com.geneus.domain.model.CurrencyInfo
+import com.geneus.domain.usecase.ClearCurrenciesUseCase
+import com.geneus.domain.usecase.GetAllCurrenciesUseCase
+import com.geneus.domain.usecase.GetCryptoCurrenciesUseCase
+import com.geneus.domain.usecase.GetFiatCurrenciesUseCase
+import com.geneus.domain.usecase.InsertCurrenciesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow

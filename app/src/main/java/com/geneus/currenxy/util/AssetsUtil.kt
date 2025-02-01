@@ -1,7 +1,7 @@
 package com.geneus.currenxy.util
 
 import android.content.Context
-import com.geneus.currenxy.domain.model.CurrencyInfo
+import com.geneus.domain.model.CurrencyInfo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader

@@ -23,3 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Currenxy"
 include(":app")
+include(":domain")
+include(":data")

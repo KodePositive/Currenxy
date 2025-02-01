@@ -1,7 +1,10 @@
 package com.geneus.currenxy.domain.usecase
 
-import com.geneus.currenxy.data.repository.CurrencyRepository
-import com.geneus.currenxy.domain.model.CurrencyInfo
+import com.geneus.domain.model.CurrencyInfo
+import com.geneus.domain.repository.CurrencyRepository
+import com.geneus.domain.usecase.GetAllCurrenciesUseCase
+import com.geneus.domain.usecase.GetCryptoCurrenciesUseCase
+import com.geneus.domain.usecase.GetFiatCurrenciesUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

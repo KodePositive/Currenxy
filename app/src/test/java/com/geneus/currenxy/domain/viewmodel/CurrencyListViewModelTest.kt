@@ -1,15 +1,15 @@
 package com.geneus.currenxy.domain.viewmodel
 
 import app.cash.turbine.test
-import com.geneus.currenxy.domain.model.CurrencyInfo
-import com.geneus.currenxy.domain.usecase.ClearCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetAllCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetCryptoCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.GetFiatCurrenciesUseCase
-import com.geneus.currenxy.domain.usecase.InsertCurrenciesUseCase
 import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListType
 import com.geneus.currenxy.ui.fragments.currencylist.CurrencyListViewModel
 import com.geneus.currenxy.util.UiState
+import com.geneus.domain.model.CurrencyInfo
+import com.geneus.domain.usecase.ClearCurrenciesUseCase
+import com.geneus.domain.usecase.GetAllCurrenciesUseCase
+import com.geneus.domain.usecase.GetCryptoCurrenciesUseCase
+import com.geneus.domain.usecase.GetFiatCurrenciesUseCase
+import com.geneus.domain.usecase.InsertCurrenciesUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers

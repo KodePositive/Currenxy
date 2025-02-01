@@ -10,10 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geneus.currenxy.databinding.FragmentCurrencyListListBinding
-import com.geneus.currenxy.domain.model.CurrencyInfo
 import com.geneus.currenxy.ui.DemoSharedViewModel
 import com.geneus.currenxy.ui.fragments.currencylist.adapter.CurrencyListRecyclerViewAdapter
 import com.geneus.currenxy.util.Status
+import com.geneus.domain.model.CurrencyInfo
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
